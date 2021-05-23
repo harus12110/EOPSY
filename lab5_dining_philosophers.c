@@ -7,6 +7,16 @@
 #include <errno.h>
 #include <string.h>
 
+// How could the program be changed to make every philosopher eat the same amount of times
+// 1. create some sort of shared variable table of size 5x2 (one entry for each philosopher: ID and no. of times eaten)
+// 2. this variable should contain 0 or 1 (for allowing and disallowing eating) 
+// 3. before a philosopher tries to pick up the forks to eat he should check the value of this variable for his id
+// 4. if it is 0 he should proceed as normal
+// 5. if it is 1 he should be unable to proceed and he should try to pick up the forks until 
+//    the value finally changes and he is allowed to
+// 6. the update of this table of values should happen every time any philosopher finishes eating
+// 7. if more than one philosopher ate the least both (or more) should be allowed to try and take the forks.
+
 // future key for the set of semaphores
 int semaphores_key;
 // variable that stores semctl and semop return value to check for errors
