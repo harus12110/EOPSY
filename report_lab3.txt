@@ -1,0 +1,191 @@
+Kamil Borkowski
+300166
+EOPSY 2021L Lab 3
+
+---------- [ Introduction ] ----------
+
+In this lab we are to get familiar with CPU scheduling of processes. A non-preemptive First Come First Serve (FCFS)
+algorithm will be used to run different numbers of processes, each of which is to run for 2000ms total and every 500ms 
+it will be blocked for input or output. The simulation will run for 10000ms each time.
+
+---------- [ Non-preemptive scheduling ] ----------
+
+In non-preemptive scheduling a process holds the CPU until it gets terminated or reaches a waiting state 
+(being blocked for input or output in our case). If it didn't it would run until completion before the CPU
+could be allocated to another process. This scheduling method is not very flexible and may be less efficient
+as high priority processes may have to wait for longer.
+
+---------- [ First-Come First-Served scheduling ] ----------
+
+The FCFS algorithm queues and executes processes in order of arrival.
+
+---------- [ Summary-Processes file output for 2 processes ] ----------
+
+Process: 0 registered... (2000 500 0 0)
+Process: 0 I/O blocked... (2000 500 500 500)
+Process: 1 registered... (2000 500 0 0)
+Process: 1 I/O blocked... (2000 500 500 500)
+Process: 0 registered... (2000 500 500 500)
+Process: 0 I/O blocked... (2000 500 1000 1000)
+Process: 1 registered... (2000 500 500 500)
+Process: 1 I/O blocked... (2000 500 1000 1000)
+Process: 0 registered... (2000 500 1000 1000)
+Process: 0 I/O blocked... (2000 500 1500 1500)
+Process: 1 registered... (2000 500 1000 1000)
+Process: 1 I/O blocked... (2000 500 1500 1500)
+Process: 0 registered... (2000 500 1500 1500)
+Process: 0 completed... (2000 500 2000 2000)
+Process: 1 registered... (2000 500 1500 1500)
+Process: 1 completed... (2000 500 2000 2000)
+
+---------- [ Summary-Results file output for 2 processes ] ----------
+
+Scheduling Type: Batch (Nonpreemptive)
+Scheduling Name: First-Come First-Served
+Simulation Run Time: 4000
+Mean: 2000
+Standard Deviation: 0
+Process #	CPU Time	IO Blocking	CPU Completed	CPU Blocked
+0			2000 (ms)	500 (ms)	2000 (ms)		3 times
+1			2000 (ms)	500 (ms)	2000 (ms)		3 times
+
+---------- [ Comments ] ----------
+
+The simulation run for 4000ms in total in a way we might expect with process 0 running for 500ms, being blocked 
+and process 1 taking its place. Then as process 1 is being blocked process 0 starts being executed again. 
+This oscillating pattern repeats until both processes have finished.
+
+---------- [ Summary-Processes file output for 5 processes ] ----------
+
+Process: 0 registered... (2000 500 0 0)
+Process: 0 I/O blocked... (2000 500 500 500)
+Process: 1 registered... (2000 500 0 0)
+Process: 1 I/O blocked... (2000 500 500 500)
+Process: 0 registered... (2000 500 500 500)
+Process: 0 I/O blocked... (2000 500 1000 1000)
+Process: 1 registered... (2000 500 500 500)
+Process: 1 I/O blocked... (2000 500 1000 1000)
+Process: 0 registered... (2000 500 1000 1000)
+Process: 0 I/O blocked... (2000 500 1500 1500)
+Process: 1 registered... (2000 500 1000 1000)
+Process: 1 I/O blocked... (2000 500 1500 1500)
+Process: 0 registered... (2000 500 1500 1500)
+Process: 0 completed... (2000 500 2000 2000)
+Process: 1 registered... (2000 500 1500 1500)
+Process: 1 completed... (2000 500 2000 2000)
+Process: 2 registered... (2000 500 0 0)
+Process: 2 I/O blocked... (2000 500 500 500)
+Process: 3 registered... (2000 500 0 0)
+Process: 3 I/O blocked... (2000 500 500 500)
+Process: 2 registered... (2000 500 500 500)
+Process: 2 I/O blocked... (2000 500 1000 1000)
+Process: 3 registered... (2000 500 500 500)
+Process: 3 I/O blocked... (2000 500 1000 1000)
+Process: 2 registered... (2000 500 1000 1000)
+Process: 2 I/O blocked... (2000 500 1500 1500)
+Process: 3 registered... (2000 500 1000 1000)
+Process: 3 I/O blocked... (2000 500 1500 1500)
+Process: 2 registered... (2000 500 1500 1500)
+Process: 2 completed... (2000 500 2000 2000)
+Process: 3 registered... (2000 500 1500 1500)
+Process: 3 completed... (2000 500 2000 2000)
+Process: 4 registered... (2000 500 0 0)
+Process: 4 I/O blocked... (2000 500 500 500)
+Process: 4 registered... (2000 500 500 500)
+Process: 4 I/O blocked... (2000 500 1000 1000)
+Process: 4 registered... (2000 500 1000 1000)
+Process: 4 I/O blocked... (2000 500 1500 1500)
+Process: 4 registered... (2000 500 1500 1500)
+
+---------- [ Summary-Results file output for 5 processes ] ----------
+
+Scheduling Type: Batch (Nonpreemptive)
+Scheduling Name: First-Come First-Served
+Simulation Run Time: 10000
+Mean: 2000
+Standard Deviation: 0
+Process #	CPU Time	IO Blocking	CPU Completed	CPU Blocked
+0			2000 (ms)	500 (ms)	2000 (ms)		3 times
+1			2000 (ms)	500 (ms)	2000 (ms)		3 times
+2			2000 (ms)	500 (ms)	2000 (ms)		3 times
+3			2000 (ms)	500 (ms)	2000 (ms)		3 times
+4			2000 (ms)	500 (ms)	2000 (ms)		3 times
+
+---------- [ Comments ] ----------
+
+For this batch of processes the initial two executions are as expected, but after process 1 is blocked one
+might think that process 2 should start execution. This is not the case becuase of the FTFS algorithm that is 
+in use. It makes is to that after becoming available process 0 will start execution immediately as it was the 
+first process to arrive. Processes are therefore executed in pairs, with a new pair starting only after both of 
+the previous processes have completed their execution. Here it's not the case for the last process as it doesn't have
+a pair so it just executes all at once. The "Process: 4 completed..." message is not present as the simulation
+didn't have enough time to display it as process 4 completed right at the end of it. If the simulation time is extended by 
+even a milisecond the message shows.
+
+---------- [ Summary-Processes file output for 10 processes ] ----------
+
+Process: 0 registered... (2000 500 0 0)
+Process: 0 I/O blocked... (2000 500 500 500)
+Process: 1 registered... (2000 500 0 0)
+Process: 1 I/O blocked... (2000 500 500 500)
+Process: 0 registered... (2000 500 500 500)
+Process: 0 I/O blocked... (2000 500 1000 1000)
+Process: 1 registered... (2000 500 500 500)
+Process: 1 I/O blocked... (2000 500 1000 1000)
+Process: 0 registered... (2000 500 1000 1000)
+Process: 0 I/O blocked... (2000 500 1500 1500)
+Process: 1 registered... (2000 500 1000 1000)
+Process: 1 I/O blocked... (2000 500 1500 1500)
+Process: 0 registered... (2000 500 1500 1500)
+Process: 0 completed... (2000 500 2000 2000)
+Process: 1 registered... (2000 500 1500 1500)
+Process: 1 completed... (2000 500 2000 2000)
+Process: 2 registered... (2000 500 0 0)
+Process: 2 I/O blocked... (2000 500 500 500)
+Process: 3 registered... (2000 500 0 0)
+Process: 3 I/O blocked... (2000 500 500 500)
+Process: 2 registered... (2000 500 500 500)
+Process: 2 I/O blocked... (2000 500 1000 1000)
+Process: 3 registered... (2000 500 500 500)
+Process: 3 I/O blocked... (2000 500 1000 1000)
+Process: 2 registered... (2000 500 1000 1000)
+Process: 2 I/O blocked... (2000 500 1500 1500)
+Process: 3 registered... (2000 500 1000 1000)
+Process: 3 I/O blocked... (2000 500 1500 1500)
+Process: 2 registered... (2000 500 1500 1500)
+Process: 2 completed... (2000 500 2000 2000)
+Process: 3 registered... (2000 500 1500 1500)
+Process: 3 completed... (2000 500 2000 2000)
+Process: 4 registered... (2000 500 0 0)
+Process: 4 I/O blocked... (2000 500 500 500)
+Process: 5 registered... (2000 500 0 0)
+Process: 5 I/O blocked... (2000 500 500 500)
+Process: 4 registered... (2000 500 500 500)
+Process: 4 I/O blocked... (2000 500 1000 1000)
+Process: 5 registered... (2000 500 500 500)
+
+---------- [ Summary-Results file output for 10 processes ] ----------
+
+Scheduling Type: Batch (Nonpreemptive)
+Scheduling Name: First-Come First-Served
+Simulation Run Time: 10000
+Mean: 2000
+Standard Deviation: 0
+Process #	CPU Time	IO Blocking	CPU Completed	CPU Blocked
+0			2000 (ms)	500 (ms)	2000 (ms)		3 times
+1			2000 (ms)	500 (ms)	2000 (ms)		3 times
+2			2000 (ms)	500 (ms)	2000 (ms)		3 times
+3			2000 (ms)	500 (ms)	2000 (ms)		3 times
+4			2000 (ms)	500 (ms)	1000 (ms)		2 times
+5			2000 (ms)	500 (ms)	1000 (ms)		1 times
+6			2000 (ms)	500 (ms)	0 (ms)			0 times
+7			2000 (ms)	500 (ms)	0 (ms)			0 times
+8			2000 (ms)	500 (ms)	0 (ms)			0 times
+9			2000 (ms)	500 (ms)	0 (ms)			0 times
+
+---------- [ Comments ] ----------
+
+Here the situation for the first 4 processes is the same as before. What is different is that the next two processes 
+come in a pair. This means that while left with 2000ms of simulation time the two processes 4 and 5 are trying to
+share execution time evenly and therefore none of them is completed as it would require at least 1500ms more simulation
+time for one to finish, and 2000ms more for both to do so.  

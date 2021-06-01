@@ -1,0 +1,33 @@
+Kamil Borkowski
+300166
+EOPSY 2021L Lab 4
+
+---------- [ Introduction ] ----------
+
+In this lab we are to get familiar with paged memory management with the use of MOSS
+Memory Management Simulator. 8 First pages of virtual memory will be mapped to physical memory 
+and we'll read from an address on each of the 64 virtual pages. This will show us the behaviour 
+of page faults and the page replacement algorithm. 
+
+---------- [ Page replacement algorithm used ] ----------
+
+By checking the source files we can find in "PageFault.java" that the default page replacement 
+algorithm is first-in first-out (FIFO). That means all pages in the memory are kept in a queue 
+(with the oldesst page at the front), and if there in a need for a page to be replaced, the front 
+of the queue is selected. 
+
+---------- [ Comments ] ----------
+
+After assigning the first 8 virtual memory pages to physical memory pages we turn on MOSS
+(but not yet run it) and we can check by clicking on page 0-7 buttons that the physical memory
+pages were mapped correctly. The other virtual memory pages up to page 31 have been mapped 
+automatically by the program.   
+
+Trying to read the pages up to page 31 all goes well, but then we reach page 32 which means we are trying
+to reference a virtual memory page which does not have a physical memory page mapped. This results in a 
+page fault. The situation is the same for all pages >31. Since our page replacement algorithm is FIFO
+the page to get replaced is the oldest one, in our case the one that was mapped to virtual memory
+page 0, as it was the first one read and thus was in the front of the in the queue. After that 
+we go in order and see what was mapped to virtual memory page number 1, 2, 3 and so on and repeat the process.
+We finish in a situation in which the original mapping between virtual and physical pages has been shifted by
+32, and we have read from all 64 virtual pages adresses'.
